@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset = "ISO-8859-1" />
+      <link href = "css/style.css" rel = "stylesheet"/>
+      <title>Spring Boot Application</title>
+   </head>
+   <body>
+	   
+	  
+<div class="put">
+		   <h1>Update the record of a Product</h1>
+	   <form id="updateForm"  method="post">
+		   <div>
+				   <input id="upid" type='text' placeholder="Enter User's' Id">
+		   </div>
+		   <div>
+				   <input id="upname" type='text' placeholder="Enter User's' Name">
+		   </div>
+		   <div>
+				   <input id="upq" type='text' placeholder="Enter User's' Email">
+		   </div>
+		    <div>
+				   <input id="upp" type='text' placeholder="Enter User's' password">
+		   </div>
+		   <input type="hidden" name="_method" value="PUT">
+		   <div>
+		   <button type="button" onclick="submitUpdateForm()" >Click</button>
+		   </div>
+	   </form>
+	   </div>
+
+	   <script th:inline="javascript">
+		   
+		   const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const productId = urlParams.get('id');
+		const productname = urlParams.get('name');
+	const productquan = urlParams.get('email');
+	const productprice = urlParams.get('password');
+      if (productId) {
+         document.getElementById('upid').value = productId;
+      }
+      document.getElementById('upname').value = productname;
+      document.getElementById('upq').value = productquan;
+       document.getElementById('upp').value = productprice
+      
+
+    function submitUpdateForm(){
+	let id = document.getElementById('upid').value;
+    let name = document.getElementById('upname').value;
+    let quan = document.getElementById('upq').value;
+    let updateUrl = "demo/update/" + encodeURIComponent(id);
+    
+    let form = document.getElementById("updateForm");
+    form.setAttribute("action", updateUrl);
+    
+    let nameField = document.createElement("input");
+    nameField.setAttribute("type", "hidden");
+    nameField.setAttribute("name", "name");
+    nameField.setAttribute("value", name);
+    
+    let quantityField = document.createElement("input");
+    quantityField.setAttribute("type", "hidden");
+    quantityField.setAttribute("name", "email");
+    quantityField.setAttribute("value", quan);
+    
+   
+    form.appendChild(nameField);
+    form.appendChild(quantityField);
+    
+    form.submit();
+    }
+    
+   
+       </script>
+	   
+   
+	  </body>  
+</html>

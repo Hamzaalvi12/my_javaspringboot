@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset = "ISO-8859-1" />
+      <link href = "css/style.css" rel = "stylesheet"/>
+      <title>Spring Boot Application</title>
+   </head>
+   <body>
+<h1 style="text-align: center;">USER LIST</h1>
+
+		   <button style="margin: 10px 5px;" type="button" onclick="clicked()" >ADD USER</button>
+           
+
+    <table id="productTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>password</th>
+                <th>action</th>
+                <th>action</th>
+            </tr>
+        </thead>
+        <tbody id="productTableBody">
+            <!-- The table rows will be dynamically generated using JavaScript -->
+        </tbody>
+    </table>
+
+
+	  
+
+
+	   <script th:inline="javascript">
+
+function clicked(){
+		window.location.href='/addUser';
+	}
+    
+    fetch('demo/all')
+          .then(response => response.json())
+          .then(data => {
+            const tableBody = document.getElementById('productTableBody');
+            console.log(data)
+            data.forEach(product => {
+              const row = document.createElement('tr');
+				console.log(data)
+              const idCell = document.createElement('td');
+              idCell.textContent = product.id;
+              row.appendChild(idCell);
+
+              const nameCell = document.createElement('td');
+              nameCell.textContent = product.name;
+              row.appendChild(nameCell);
+
+              const qunCell = document.createElement('td');
+              qunCell.textContent = product.email;
+              row.appendChild(qunCell);
+              
+              const PasswordCell = document.createElement('td');
+              PasswordCell.textContent = product.password;
+              row.appendChild(PasswordCell);
+              
+              const updateButtonCell = document.createElement('td');
+		      const updateButton = document.createElement('button');
+		      updateButton.setAttribute('id','tup');
+		      updateButton.textContent = 'Update';
+		      updateButton.addEventListener('click', () => {
+		        const productId = product.id;
+		        // Perform the update operation with the productId
+		        window.location.href="/updateUser?id="+productId +"&name="+product.name+"&email="+product.email+"&password="+product.password;
+		        console.log('Update clicked for user ID:', productId);
+		      });
+		      updateButtonCell.appendChild(updateButton);
+		      row.appendChild(updateButtonCell);
+		      
+		      const deletButtonCell = document.createElement('td');
+		      const deletButton = document.createElement('button');
+		      deletButton.setAttribute('id','tup');
+		      deletButton.textContent = 'delete';
+		      deletButton.addEventListener('click', () => {
+		        const productId = product.id;
+		        // Perform the update operation with the productId
+		        window.location.href="/deletUser?id="+productId;
+		        console.log('delet clicked for user ID:', productId);
+		      });
+		      deletButtonCell.appendChild(deletButton);
+		      row.appendChild(deletButtonCell);
+              
+              tableBody.appendChild(row);
+            });
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+       </script>
+	   
+   
+	  </body>  
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset = "ISO-8859-1" />
+      <link href = "css/style.css" rel = "stylesheet"/>
+      <title>Spring Boot Application</title>
+   </head>
+   <body>
+</div>
+<div class="delete">
+		   <h1>Delete the record of a user</h1>
+		   <form id="deleteForm"  method="post">
+		   <div>
+				   <input id="delid" type'text' placeholder="Enter Product's Id">
+		   </div>
+		   <input type="hidden" name="_method" value="DELETE">
+		   <div>
+		   <button type="button" onclick="submitForm()" >Click</button>
+		   </div>
+		   </form>
+	   </div>
+	   
+	  
+	  <script th:inline="javascript">
+		  
+		  const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const productId = urlParams.get('id');
+
+      if (productId) {
+         document.getElementById('delid').value = productId;
+      }
+      
+function submitForm() {
+        var productId = document.getElementById('delid').value;
+        console.log(productId)
+        var deleteUrl = "demo/delete/" + encodeURIComponent(productId);
+
+        var form = document.getElementById("deleteForm");
+        form.action = deleteUrl;
+        form.submit();
+    }
+    </script>
+    
+    
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset = "ISO-8859-1" />
+      <link href = "css/style.css" rel = "stylesheet"/>
+      <title>Login Page</title>
+   </head>
+   <body>
+	 <div class="parent_log">
+		 <div class="log">
+			 <h1>Login here</h1>
+			 <form onsubmit="submitted()">
+			 <div>
+				   <input id="email" type='text'name="name" placeholder="Enter email">
+		     </div>
+		     <div>
+				   <input id="pass" type='password' name="name" placeholder="Enter Password">
+		   	 </div>
+		   	 <div>
+			   <button onclick="login()" id="lbut" type="submit">Login</button>
+		     </div>
+		     </form>
+		     <a href="http://localhost:8080/signup" id="lanchor">Donot have Account sign up Here</a>
+		 </div>
+	 </div>
+
+   </body>
+	
+	<script>
+		
+		function submitted()
+		{
+		let email=document.getElementById('email').value;
+		let pass=document.getElementById('pass').value;
+		let password=document.getElementById('')
+		fetch("auto/all").
+		then(response=>response.json())
+		.then(data=>{
+			let ismatched=false;
+			data.forEach(user=>{
+			if(user.email==email && user.password==pass){
+				ismatched=true;
+				return;
+			}
+		});
+		if(ismatched){
+			window.location.href="/interface";
+		}else{
+			alert("Enter correct credentials");
+		}
+		})
+		}
+	</script>
+	   
+</html>

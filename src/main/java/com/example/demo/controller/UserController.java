@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 //import org.springframework.http.HttpStatus;
 //import org.springframework.http.ResponseEntity;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -44,7 +46,7 @@ public class UserController {
 		u_repository.save(u);
 		return "reset successfully";
 	}
-/*	@PostMapping(path="/login")
+	/*@PostMapping(path="/login")
 	public ResponseEntity<String> loginUser(@RequestParam String email, @RequestParam String password) {
 	    User user = u_repository.findByEmail(email);
 	    if (user != null && bCryptPasswordEncoder.matches(password, user.getPassword())) {

@@ -48,12 +48,13 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/products/new","/products/authenticate").permitAll()
+                    .requestMatchers("/", "/forgotpass", "/signup").permitAll() // Allow access without authentication
+                    .requestMatchers("/index").hasRole("USER") // Requires ROLE_USER
+                    .requestMatchers("/index", "/addProduct", "/updateProduct", "/deleteProduct").hasRole("ADMIN") // Requires ROLE_ADMIN
+                    .anyRequest().authenticated()
                 .and()
-                .authorizeHttpRequests().requestMatchers("/products/**")
-                .authenticated().and()
                 .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)

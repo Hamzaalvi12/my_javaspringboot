@@ -32,7 +32,7 @@
 		/* let email = document.getElementById('email').value;
     let password = document.getElementById('pass').value;
 
-    fetch("user/login", {
+    fetch("user/all", {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
@@ -63,7 +63,6 @@
     
     let email = document.getElementById('email').value;
 let password = document.getElementById('pass').value;
-
 fetch("user/all")
   .then(response => response.json()) // Return the parsed JSON promise
   .then(data => {
